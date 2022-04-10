@@ -9,7 +9,7 @@ document.addEventListener("click", (event) => {
       const newTitle = prompt("Enter a new title for the node");
       if (newTitle.trim()) {
          edit(id, newTitle).then(() => {
-            console.log(event.target.closest("li"));
+            document.getElementById(id).innerHTML = newTitle;
          });
       }
    }
