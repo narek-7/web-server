@@ -9,10 +9,10 @@ const app = express();
 app.set("view engine", "ejs");
 // defoult folder named is "views", here we change his name to "pages"
 app.set("views", "pages");
+
 app.use(express.static(path.resolve(__dirname, "public")));
 // we will tell express, wich data we use and what format they will use
 app.use(express.json());
-
 app.use(
    express.urlencoded({
       extended: true,
@@ -47,14 +47,15 @@ app.delete("/:id", async (req, res) => {
 });
 
 app.put("/:id/:title", async (req, res) => {
+   console.log(typeof req.params.id);
    await editNote(req.params);
    res.render("index", {
       title: "Express App",
       notes: await getNotes(),
-      created: true,
+      created: false,
    });
 });
-   
+
 app.listen(port, () => {
    console.log(chalk.green(`Server running on port ${port}...`));
 });
